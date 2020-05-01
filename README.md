@@ -1,2 +1,2 @@
-# resnet50-tensorflow
- ResNet50 on TensorFlow, served on the Starlette web framework
+# resnet50 on flask
+ a resnet implementation written in tensorflow, served on flask
