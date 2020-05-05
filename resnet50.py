@@ -12,6 +12,7 @@ from PIL import Image
 import numpy as np
 import flask
 import io
+import os
 import tensorflow as tf
 
 # initialize our Flask application and the Keras model
@@ -46,16 +47,11 @@ def predict():
     # initialize the data dictionary that will be returned from the
     # view
     data = {"success": False}
-    print('data',data)
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        print(flask.request.files.get("image"))
-        print('files', flask.request.files)
         if flask.request.files.get("image"):
-            print("test that this was a POST and image was valid")
             # read the image in PIL format
             image = flask.request.files["image"].read()
-            print(image)
             image = Image.open(io.BytesIO(image))
 
             # preprocess the image and prepare it for classification
@@ -86,4 +82,4 @@ if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
     load_model()
-    app.run(host='0.0.0.0', port=4000)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
