@@ -11,12 +11,14 @@ from keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 import flask
+from flask_cors import CORS
 import io
 import os
 import tensorflow as tf
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
+CORS(app)
 model = None
 
 def load_model():
